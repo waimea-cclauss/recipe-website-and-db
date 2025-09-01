@@ -42,19 +42,19 @@ def index():
 #-----------------------------------------------------------
 # Thing page route - Show details of a single thing
 #-----------------------------------------------------------
-@app.get("/thing/<int:id>")
-def show_one_thing(id):
+@app.get("/recipe/<int:id>")
+def show_one_recipe(id):
     with connect_db() as client:
         # Get the thing details from the DB
-        sql = "SELECT id, name, price FROM things WHERE id=?"
+        sql = "SELECT id, name, instructions, ingredients, image_file FROM recipes WHERE id=?"
         params = [id]
         result = client.execute(sql, params)
 
         # Did we get a result?
         if result.rows:
             # yes, so show it on the page
-            thing = result.rows[0]
-            return render_template("pages/thing.jinja", thing=thing)
+            recipe = result.rows[0]
+            return render_template("pages/recipe.jinja", recipe=recipe)
 
         else:
             # No, so show error

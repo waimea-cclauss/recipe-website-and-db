@@ -1,0 +1,31 @@
+{#=====================================================
+  Thing page
+  - Shows details of a single thing
+  - Has a delete link to remove it
+=====================================================#}
+
+{% extends 'pages/base.jinja' %}
+
+
+{% block title %}
+
+    {{ recipe.name }}
+
+{% endblock %}
+
+
+{% block content %}
+<img src="/static/images/{{ recipe.image_file }}">
+
+        <h2>Ingredients</h2>
+
+        <p>{{ recipe.ingredients | replace('\n', '<br>') | safe }}</p>
+
+        
+    </article>
+
+
+    <a role="button" href="/">Back to Recipe List</a>
+
+{% endblock %}
+
