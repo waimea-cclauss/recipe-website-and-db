@@ -19,8 +19,14 @@
 
         <h2>Ingredients</h2>
 
-        <p>{{ recipe.ingredients | replace('\n', '<br>') | safe }}</p>
+        <ul>
+          <li>{{ recipe.ingredients | replace('\n', '</li><li>') | safe }}</li>
+        </ul>
 
+        <h2>Instructions</h2>
+        <ol>
+        <li>{{ recipe.instructions | replace('\n', '</li><li>') | safe }}</li>
+        </ol>
         
     </article>
 
