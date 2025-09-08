@@ -20,12 +20,12 @@
         <h2>Ingredients</h2>
 
         <ul>
-          <li>{{ recipe.ingredients | replace('\n', '</li><li>') | safe }}</li>
+          <li>{{ recipe.ingredients | replace('\n\nor\n\n', '</li></ul><p>or</p><ul><li>')  | replace('\n', '</li><li>') | safe }}</li>
         </ul>
 
         <h2>Instructions</h2>
         <ol>
-        <li>{{ recipe.instructions | replace('\n', '</li><li>') | safe }}</li>
+        <li>{{ recipe.instructions | replace('\n\nor\n\n', '</li></ol><p>or</p><ol><li>')  | replace('\n', '</li><li>') | safe }}</li>
         </ol>
         
     </article>
