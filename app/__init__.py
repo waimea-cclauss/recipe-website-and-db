@@ -40,7 +40,7 @@ def index():
 
 
 #-----------------------------------------------------------
-# Thing page route - Show details of a single thing
+# Recipe page route - Show details of a single recipe
 #-----------------------------------------------------------
 @app.get("/recipe/<int:id>")
 def show_one_recipe(id):
@@ -60,6 +60,13 @@ def show_one_recipe(id):
             # No, so show error
             return not_found_error()
 
+
+#-----------------------------------------------------------
+# Recipe form page route
+#-----------------------------------------------------------
+@app.get("/recipe/new")
+def show_recipe_form():
+    return render_template("pages/recipe-form.jinja")
 
 #-----------------------------------------------------------
 # Route for adding a thing, using data posted from a form
