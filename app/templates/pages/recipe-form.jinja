@@ -18,12 +18,41 @@
 
   <article class="recipe wide">
         <h2>New Recipe</h2>
+    <form>
+      <fieldset>
+        <label>
+          Recipe Name
+          <input
+            name="recipe_name"
+            placeholder="Recipe Name"
+            autocomplete="recipe-name"
+          />
+        </label>
+      </fieldset>
+    </form>
 
-        https://www.w3schools.com/html/html_forms.asp
-        https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_text
-        https://www.w3schools.com/tags/tag_textarea.asp
-        https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_textarea
-        https://picocss.com/docs/forms
+    <form action="/action_page.php">
+      <p>
+        <label for="w3review">
+          Ingredients
+        </label>
+      </p>
+      <textarea id="w3review" name="w3review" rows="4" cols="50">Add the ingredients and the amount needed</textarea>
+      <br>
+
+      <p>
+        <label for="w3review">
+          Instructions
+        </label>
+      </p>
+      <textarea id="w3review" name="w3review" rows="4" cols="50">Add the instructions in the correct order</textarea>
+      <br>
+
+      <input 
+        type="submit" 
+        value="Add"
+      />
+    </form>
   </article>
 
 
