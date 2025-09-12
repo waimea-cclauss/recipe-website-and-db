@@ -17,36 +17,32 @@
 {% block content %}
 
   <article class="recipe wide">
-        <h2>New Recipe</h2>
-    <form>
+    <h2>New Recipe</h2>
+    
+    <form method="POST" action="/recipe/new">
       <fieldset>
+
         <label>
           Recipe Name
-          <input
-            name="recipe_name"
-            placeholder="Recipe Name"
-            autocomplete="recipe-name"
-          />
+          <input name="name" placeholder="Recipe Name" required>
         </label>
-      </fieldset>
-    </form>
 
-    <form action="/action_page.php">
-      <p>
-        <label for="w3review">
+        <label>
           Ingredients
+          <textarea name="ingredients" rows="4" cols="50" placeholder="Add the ingredients and the amount needed, one per line" required></textarea>
         </label>
-      </p>
-      <textarea id="w3review" name="w3review" rows="4" cols="50">Add the ingredients and the amount needed</textarea>
-      <br>
 
-      <p>
-        <label for="w3review">
+        <label>
           Instructions
+          <textarea name="instructions" rows="4" cols="50" placeholder="Add the instructions in the correct order, one per line" required></textarea>
         </label>
-      </p>
-      <textarea id="w3review" name="w3review" rows="4" cols="50">Add the instructions in the correct order</textarea>
-      <br>
+    
+        <label>
+          Recipe Image
+          <input name="image_file" placeholder="Recipe Image Filename" required>
+        </label>
+
+      </fieldset>
 
       <input 
         type="submit" 
