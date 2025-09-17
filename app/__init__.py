@@ -14,8 +14,11 @@ from app.helpers.time    import init_datetime, utc_timestamp, utc_timestamp_now
 import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
-UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+UPLOAD_FOLDER = 'app/static/uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -87,20 +90,32 @@ def add_a_recipe():
     name  = request.form.get("name")
     ingredients = request.form.get("ingredients")
     instructions = request.form.get("instructions")
-    image_file = request.form.get("image_file")
 
     # Sanitise the text inputs
     name = html.escape(name)
 
-    with connect_db() as client:
-        # Add the thing to the DB
-        sql = "INSERT INTO recipes (name, ingredients, instructions, image_file) VALUES (?, ?, ?, ?)"
-        params = [name, ingredients, instructions, image_file]
-        client.execute(sql, params)
+    # try to get the details of the uploaded file
+    image_file = request.files.get("image_file")
 
-        # Go back to the home page
-        flash(f"Recipe '{name}' added", "success")
+    if image_file and image_file.filename != "" and allowed_file(image_file.filename):
+        
+        filename = secure_filename(image_file.filename)
+        image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
+        with connect_db() as client:
+            # Add the thing to the DB
+            sql = "INSERT INTO recipes (name, ingredients, instructions, image_file) VALUES (?, ?, ?, ?)"
+            params = [name, ingredients, instructions, filename]
+            client.execute(sql, params)
+
+            # Go back to the home page
+            flash(f"Recipe '{name}' added", "success")
+            return redirect("/")
+        
+    else:
+        flash(f"Problem uploading image")
         return redirect("/")
+    
     
     #Add a image file
 def allowed_file(filename):

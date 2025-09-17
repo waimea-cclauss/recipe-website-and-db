@@ -19,7 +19,7 @@
   <article class="recipe wide">
     <h2>New Recipe</h2>
     
-    <form method="POST" action="/recipe/new">
+    <form method="POST" action="/recipe/new" enctype="multipart/form-data">
       <fieldset>
 
         <label>
@@ -39,7 +39,7 @@
     
         <label>
           Recipe Image
-          <input name="image_file" placeholder="Recipe Image Filename" required>
+          <input name="image_file" type="file" placeholder="Recipe Image Filename" required>
         </label>
 
       </fieldset>
